@@ -18,8 +18,7 @@ const Container = styled(BaseBox)`
   }
 `;
 
-function FormBox({children}) {
+function FormBox({ children }) {
   return <Container>{children}</Container>;
 }
-
 export default FormBox;

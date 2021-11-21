@@ -31,8 +31,8 @@ const Notification = styled.div`
 `;
 
 const LOGIN_MUTATION = gql`
-  mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
+  mutation login($userId: String!, $password: String!) {
+    login(userId: $userId, password: $password) {
       ok
       token
       error
@@ -42,7 +42,6 @@ const LOGIN_MUTATION = gql`
 
 function Login() {
   const location = useLocation();
-  console.log(location);
   const {
     register,
     handleSubmit,
@@ -54,7 +53,7 @@ function Login() {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      username: location?.state?.username || "",
+      userId: location?.state?.userId || "",
       password: location?.state?.password || "",
     },
   });
@@ -78,9 +77,9 @@ function Login() {
     if (loading) {
       return;
     }
-    const { username, password } = getValues();
+    const { userId, password } = getValues();
     login({
-      variables: { username, password },
+      variables: { userId, password },
     });
   };
   const clearLoginError = () => {
@@ -97,19 +96,19 @@ function Login() {
         <form onSubmit={handleSubmit(onSubmitValid)}>
           <Input
             ref={register({
-              required: "Username is required",
+              required: "userId is required",
               minLength: {
-                value: 5,
-                message: "Username should be longer than 5 chars.",
+                value: 3,
+                message: "User Id should be longer than 3 chars.",
               },
             })}
             onChange={clearLoginError}
-            name="username"
+            name="userId"
             type="text"
-            placeholder="Username"
-            hasError={Boolean(errors?.username?.message)}
+            placeholder="userId"
+            hasError={Boolean(errors?.userId?.message)}
           />
-          <FormError message={errors?.username?.message} />
+          <FormError message={errors?.userId?.message} />
           <Input
             ref={register({
               required: "Password is required.",

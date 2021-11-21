@@ -12,10 +12,9 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-
 const Wrapper = styled.div`
-max-width: 350px;
-width: 100%;
+  max-width: 350px;
+  width: 100%;
 `;
 
 const Footer = styled.footer`
@@ -23,19 +22,19 @@ const Footer = styled.footer`
 `;
 
 const DarkModeBtn = styled.span`
-  cursor: pointer; 
+  cursor: pointer;
 `;
 
 function AuthLayout({ children }) {
   const darkMode = useReactiveVar(darkModeVar);
-  return(
+  return (
     <Container>
-        <Wrapper>{children}</Wrapper>
-        <Footer>
-          <DarkModeBtn onClick={darkMode ? disableDarkMode : enableDarkMode}>
-            <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
-          </DarkModeBtn>
-        </Footer>
+      <Wrapper>{children}</Wrapper>
+      <Footer>
+        <DarkModeBtn onClick={darkMode ? disableDarkMode : enableDarkMode}>
+          <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
+        </DarkModeBtn>
+      </Footer>
     </Container>
   );
 }

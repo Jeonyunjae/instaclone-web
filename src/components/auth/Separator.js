@@ -29,5 +29,4 @@ function Separator() {
     </SSeparator>
   );
 }
-
 export default Separator;

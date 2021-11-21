@@ -27,16 +27,14 @@ const Subtitle = styled(FatLink)`
 
 const CREATE_ACCOUNT_MUTATION = gql`
   mutation createAccount(
-    $firstName: String!
-    $lastName: String
-    $username: String!
+    $userName: String!
+    $userId: String!
     $email: String!
     $password: String!
   ) {
     createAccount(
-      firstName: $firstName
-      lastName: $lastName
-      username: $username
+      userName: $userName
+      userId: $userId
       email: $email
       password: $password
     ) {
@@ -49,23 +47,23 @@ const CREATE_ACCOUNT_MUTATION = gql`
 function SingUp() {
   const history = useHistory();
   const onCompleted = (data) => {
-    const { username, password } = getValues();
+    const { userId, password } = getValues();
     const {
-      createAccount: { ok, error },
+      createAccount: { ok },
     } = data;
     if (!ok) {
       return;
     }
     history.push(routes.home, {
       message: "Account created. Please log in.",
-      username,
+      userId,
       password,
     });
   };
   const [createAccount, { loading }] = useMutation(CREATE_ACCOUNT_MUTATION, {
     onCompleted,
   });
-  const { register, handleSubmit, errors, formState, getValues } = useForm({
+  const { register, handleSubmit, formState, getValues } = useForm({
     mode: "onChange",
   });
   const onSubmitValid = (data) => {
@@ -93,15 +91,9 @@ function SingUp() {
             ref={register({
               required: "First Name is required.",
             })}
-            name="firstName"
+            name="userName"
             type="text"
-            placeholder="First Name"
-          />
-          <Input
-            ref={register}
-            type="text"
-            placeholder="Last Name"
-            name="lastName"
+            placeholder="User Name"
           />
           <Input
             ref={register({
@@ -113,11 +105,11 @@ function SingUp() {
           />
           <Input
             ref={register({
-              required: "Username is required.",
+              required: "User Id is required.",
             })}
-            name="username"
+            name="userId"
             type="text"
-            placeholder="Username"
+            placeholder="userId"
           />
           <Input
             ref={register({
