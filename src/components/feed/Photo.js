@@ -8,6 +8,7 @@ import {
 import { faHeart as SolidHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Avatar from "../Avatar";
 import { FatText } from "../shared";
@@ -115,8 +116,12 @@ function Photo({
   return (
     <PhotoContainer key={id}>
       <PhotoHeader>
-        <Avatar lg url={user.avatar} />
-        <UserId>{user.userId}</UserId>
+        <Link to={`/users/${user.userId}`}>
+          <Avatar lg url={user.avatar} />
+        </Link>
+        <Link to={`/users/${user.userId}`}>
+          <UserId>{user.userId}</UserId>
+        </Link>
       </PhotoHeader>
       <PhotoFile src={file} />
       <PhotoData>
