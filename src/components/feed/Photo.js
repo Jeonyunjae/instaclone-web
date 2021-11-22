@@ -36,7 +36,7 @@ const PhotoHeader = styled.div`
   border-bottom: 1px solid rgb(239, 239, 239);
 `;
 
-const Username = styled(FatText)`
+const UserId = styled(FatText)`
   margin-left: 15px;
 `;
 
@@ -116,7 +116,7 @@ function Photo({
     <PhotoContainer key={id}>
       <PhotoHeader>
         <Avatar lg url={user.avatar} />
-        <Username>{user.userId}</Username>
+        <UserId>{user.userId}</UserId>
       </PhotoHeader>
       <PhotoFile src={file} />
       <PhotoData>
@@ -141,6 +141,7 @@ function Photo({
         </PhotoActions>
         <Likes>{likes === 1 ? "1 like" : `${likes} likes`}</Likes>
         <Comments
+          photoId={id}
           author={user.userId}
           caption={caption}
           commentNumber={commentNumber}
